@@ -92,7 +92,7 @@ puts "5 messages privés créés ✅"
 =end
 # Comments (sur gossips et commentaires)
 20.times do
-  commentable = [Gossip.all.sample, Comment.all.sample].compact.sample
+  commentable = [ Gossip.all.sample, Comment.all.sample ].compact.sample
   Comment.create!(
     content: Faker::Lorem.sentence,
     user: User.all.sample,
@@ -103,7 +103,7 @@ puts "20 commentaires créés ✅"
 
 # Likes (sur gossips et commentaires)
 20.times do
-  likeable = [Gossip.all.sample, Comment.all.sample].sample
+  likeable = [ Gossip.all.sample, Comment.all.sample ].sample
   Like.create!(
     user: User.all.sample,
     likeable: likeable
@@ -112,3 +112,6 @@ end
 puts "20 likes créés ✅"
 
 puts "Seed terminé 🎉"
+# This file should ensure the existence of records required to run the application in every environment (production,
+# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).

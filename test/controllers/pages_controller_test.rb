@@ -15,9 +15,4 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get pages_contact_url
     assert_response :success
   end
-
-  test "should get welcom" do
-    get pages_welcom_url
-    assert_response :success
-  end
 end

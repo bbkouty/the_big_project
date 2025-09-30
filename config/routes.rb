@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   get "pages/team"
   get "pages/contact"
   get "pages/welcome/:first_name", to: "pages#welcome"
-
-  resources :gossips, only: [:index, :show]
-  resources :users, only: [:show]
+  resources :gossips, only: [ :index, :show ]
+  resources :users, only: [ :show ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
