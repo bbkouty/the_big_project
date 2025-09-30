@@ -1,0 +1,24 @@
+<%# app/views/pages/contact.html.erb #%>
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 rounded">
+    <h1 class="text-center text-primary mb-4">📩 Contactez-nous</h1>
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nom complet</label>
+        <input type="text" class="form-control" id="name" placeholder="Votre nom">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Adresse email</label>
+        <input type="email" class="form-control" id="email" placeholder="nom@example.com">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" rows="4" placeholder="Votre message..."></textarea>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </div>
+    </form>
+  </div>
+</div>

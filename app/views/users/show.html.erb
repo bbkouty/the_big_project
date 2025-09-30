@@ -1,0 +1,16 @@
+<%# app/views/users/show.html.erb #%>
+
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <h3 class="card-title text-info">
+      <%= @user.first_name %> <%= @user.last_name %>
+    </h3>
+    <p class="card-text"><strong>Email :</strong> <%= @user.email %></p>
+    <p class="card-text"><strong>Description :</strong> <%= @user.description %></p>
+  </div>
+  <div class="card-footer text-muted">
+    Membre depuis le <%= @user.created_at.strftime("%d/%m/%Y") %>
+  </div>
+</div>
+
+<%= link_to "⬅ Retour aux potins", root_path, class: "btn btn-secondary" %>

@@ -1,0 +1,18 @@
+<%# app/views/gossips/show.html.erb #%>
+
+<div class="card shadow-lg mb-4">
+  <div class="card-body">
+    <h2 class="card-title text-success"><%= @gossip.title %></h2>
+    <p class="card-text"><%= @gossip.content %></p>
+
+    <p>
+      👤 Auteur : 
+      <%= link_to @gossip.user.first_name, user_path(@gossip.user), class: "text-decoration-none fw-bold" %>
+    </p>
+  </div>
+  <div class="card-footer text-muted">
+    Créé le <%= @gossip.created_at.strftime("%d/%m/%Y à %H:%M") %>
+  </div>
+</div>
+
+<%= link_to "⬅ Retour aux potins", root_path, class: "btn btn-secondary" %>
