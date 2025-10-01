@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # get "pages/home"
-  resources :gossips do 
+  resources :gossips do
     resources :comments, only: [ :create, :edit, :update, :destroy ]
   end
   resources :users, only: [ :show ]

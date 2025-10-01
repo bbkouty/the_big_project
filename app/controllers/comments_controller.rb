@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_gossip
-  before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :set_comment, only: [ :edit, :update, :destroy ]
 
   def create
     @comment = @gossip.comments.new(comment_params)
@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @gossip
     else
-      render 'gossips/show'
+      render "gossips/show"
     end
   end
 

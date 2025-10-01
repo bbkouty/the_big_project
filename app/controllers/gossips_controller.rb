@@ -1,6 +1,5 @@
 class GossipsController < ApplicationController
-    before_action :set_gossip, only: [:show, :edit, :update, :destroy] #, :edit, :update, :destroy
-    
+    before_action :set_gossip, only: [ :show, :edit, :update, :destroy ]
     def index
         @gossips = Gossip.all
     end
