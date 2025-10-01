@@ -12,11 +12,17 @@ class GossipsController < ApplicationController
     end
 
     def create
-        @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.first) # temporaire: le user sera le premier de la base
+        @gossip = Gossip.new(gossip_params.merge(user: User.first)) # temporaire: associe toujours le premier user
         if @gossip.save
             redirect_to root_path, notice: "Gossip créé avec succès !"
         else
             render :new, status: :unprocessable_entity
         end
+    end
+
+    private
+
+    def gossip_params
+        params.require(:gossip).permit(:title, :content)
     end
 end

@@ -1,7 +1,7 @@
 <%# app/views/gossips/new.html.erb #%>
 
 <div class="container mt-5">
-  <h2 class="mb-4">Créer un nouveau potin 📝</h2>
+  <h2 class="mb-4 text-center">Créer un nouveau potin 📝</h2>
 
   <% if @gossip.errors.any? %>
     <div class="alert alert-danger">
@@ -14,17 +14,21 @@
     </div>
   <% end %>
 
-  <%= form_tag gossips_path, method: :post, class: "needs-validation" do %>
-    <div class="mb-3">
-      <%= label_tag :title, "Titre" %>
-      <%= text_field_tag :title, params[:title], class: "form-control", placeholder: "Titre du potin" %>
-    </div>
+  <div class="card shadow-sm p-4">
+    <%= simple_form_for @gossip do |f| %>
+      <div class="mb-3">
+        <%= f.input :title, label: "Titre", 
+          placeholder: "Titre du potin", input_html: { class: "form-control" } %>
+      </div>
 
-    <div class="mb-3">
-      <%= label_tag :content, "Contenu" %>
-      <%= text_area_tag :content, params[:content], class: "form-control", placeholder: "Raconte ton potin ici..." %>
-    </div>
+      <div class="mb-3">
+        <%= f.input :content, as: :text, label: "Contenu", 
+          placeholder: "Raconte ton potin ici...", input_html: { class: "form-control", rows: 5 } %>
+      </div>
 
-    <%= submit_tag "Créer le potin", class: "btn btn-primary" %>
-  <% end %>
+      <div class="text-center">
+        <%= f.button :submit, "Créer le potin", class: "btn btn-primary px-4" %>
+      </div>
+    <% end %>
+  </div>
 </div>
