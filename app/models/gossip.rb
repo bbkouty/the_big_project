@@ -1,7 +1,7 @@
 class Gossip < ApplicationRecord
   belongs_to :user
-  has_many :gossips_tags, dependent: :destroy
-  has_many :tags, through: :gossips_tags
+  has_many :gossip_tags, dependent: :destroy
+  has_many :tags, through: :gossip_tags
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 

@@ -8,11 +8,48 @@
     <p>
       👤 Auteur : 
       <%= link_to @gossip.user.first_name, user_path(@gossip.user), class: "text-decoration-none fw-bold" %>
+      <span class="text-muted">- 🌆 <%= link_to @gossip.user.city.name, city_path(@gossip.user.city), class: "text-decoration-none" %></span>
     </p>
   </div>
-  <div class="card-footer text-muted">
-    Créé le <%= @gossip.created_at.strftime("%d/%m/%Y à %H:%M") %>
+
+  <div class="card-body">
+    <h4>Commentaires (<%= @gossip.comments.count %>)</h4>
+    <ul class="list-group mt-3 mb-3">
+      <% @comments.each do |comment| %>
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-start">
+          <span>
+            <strong><%= comment.user.first_name %>:</strong> <%= comment.content %>
+          </span>
+
+          <div class="d-flex gap-1">
+            <!-- Modifier le commentaire -->
+            <%= link_to "✏", edit_gossip_comment_path(@gossip, comment), class: "btn btn-sm btn-outline-success" %>
+
+            <!-- Supprimer le commentaire -->
+            <%= button_to "🗑", gossip_comment_path(@gossip, comment), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer ce commentaire ?" }, class: "btn btn-sm btn-outline-danger" %>
+          </div>
+        </div>
+        <small class="text-muted">❤️ <%= comment.likes.count %></small>
+      </li>
+    <% end %>
+    </ul>
+
+    <%= form_with(model: [@gossip, @comment]) do |f| %>
+      <%= f.text_area :content, class: "form-control", placeholder: "Écrire un commentaire..." %>
+      <%= f.submit "Ajouter", class: "btn btn-primary mt-2" %>
+    <% end %>
+
+    <div class="card-footer d-flex justify-content-between align-items-center mt-3">
+      <small class="text-muted">Créé le <%= @gossip.created_at.strftime("%d/%m/%Y à %H:%M") %></small>
+
+      <div class="d-flex gap-2">
+        <%= link_to "⬅ Retour aux potins", root_path, class: "btn btn-secondary" %>
+        <%= link_to "✏ Modifier le potin", edit_gossip_path(@gossip), class: "btn btn-success" %>
+        <%= form_with(model: @gossip, method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "d-inline") do |f| %>
+          <%= f.submit "🗑 Supprimer le potin", class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
-
-<%= link_to "⬅ Retour aux potins", root_path, class: "btn btn-secondary" %>

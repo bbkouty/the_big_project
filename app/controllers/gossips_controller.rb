@@ -1,10 +1,13 @@
 class GossipsController < ApplicationController
+    before_action :set_gossip, only: [:show, :edit, :update, :destroy] #, :edit, :update, :destroy
+    
     def index
         @gossips = Gossip.all
     end
 
     def show
-        @gossip = Gossip.find(params[:id])
+        @comments = @gossip.comments
+        @comment = Comment.new
     end
 
     def new
@@ -20,9 +23,29 @@ class GossipsController < ApplicationController
         end
     end
 
+    def edit
+    end
+
+    def update
+        if @gossip.update(gossip_params)
+            redirect_to gossip_path(@gossip), notice: "Gossip mis à jour avec succès !"
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @gossip.destroy
+        redirect_to root_path, notice: "Gossip supprimé avec succès !"
+    end
+
     private
 
+    def set_gossip
+        @gossip = Gossip.find(params[:id])
+    end
+
     def gossip_params
-        params.require(:gossip).permit(:title, :content)
+        params.require(:gossip).permit(:title, :content, :user_id, tag_ids: [])
     end
 end

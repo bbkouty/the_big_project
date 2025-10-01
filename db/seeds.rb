@@ -32,11 +32,21 @@ City.destroy_all
 puts "Base nettoyée ✅"
 
 # Cities
-10.times do
-  City.create!(
-    name: Faker::Address.city,
-    zip_code: Faker::Address.zip_code
-  )
+city_zip_codes = {
+  "Paris" => "75000",
+  "Lyon" => "69000",
+  "Marseille" => "13000",
+  "Toulouse" => "31000",
+  "Nice" => "06000",
+  "Nantes" => "44000",
+  "Strasbourg" => "67000",
+  "Bordeaux" => "33000",
+  "Lille" => "59000",
+  "Rennes" => "35000"
+}
+
+city_zip_codes.each do |city, zip|
+  City.create!(name: city, zip_code: zip)
 end
 puts "10 villes créées ✅"
 
@@ -56,7 +66,7 @@ puts "10 utilisateurs créés ✅"
 # Gossips
 20.times do
   Gossip.create!(
-    title: Faker::Book.title,
+    title: Faker::Book.title[0..13], # Limite à 14 caractères
     content: Faker::Lorem.paragraph,
     user: User.all.sample
   )

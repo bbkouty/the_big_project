@@ -1,28 +1,41 @@
-<%# app/views/gossips/index.html.erb #%>
+<%# app/views/gossips/index.html.erb %>
 
-<h1 class="text-center">Bienvenue sur The Big Project !</h1>
+<div class="container mt-4">
 
-<h2 class="mb-4 text-center">📢 Nos super potins</h2>
+  <h1 class="text-center mb-4">Bienvenue sur The Big Project 🚀</h1>
 
-<div class="text-center mb-4">
-  <%= link_to "➕ Ajouter un potin", new_gossip_path, class: "btn btn-success" %>
-</div>
+  <div class="text-center mb-5">
+    <%= link_to "➕ Ajouter un potin", new_gossip_path, class: "btn btn-success btn-lg" %>
+  </div>
 
-<div class="row">
   <% @gossips.each do |gossip| %>
-    <div class="col-md-4">
-      <div class="card shadow-sm mb-4">
-        <div class="card-body">
-          <h5 class="card-title text-primary"><%= gossip.title %></h5>
-          <p class="card-text">
-            <strong>Auteur :</strong> <%= gossip.user.first_name %>
-          </p>
-          <%= link_to "Voir plus", gossip_path(gossip), class: "btn btn-outline-primary btn-sm" %>
+    <div class="card shadow-sm mb-4">
+      <!-- En-tête du post -->
+      <div class="card-header d-flex align-items-center">
+        <img src="https://placehold.co/50" class="rounded-circle me-3" alt="avatar">
+        <div>
+          <strong><%= link_to gossip.user.first_name, user_path(gossip.user), class: "text-decoration-none text-dark" %></strong>
+          <span class="text-muted"> · <%= link_to gossip.user.city.name, city_path(gossip.user.city), class: "text-muted" %></span><br>
+          <small class="text-muted">Publié le <%= gossip.created_at.strftime("%d/%m/%Y à %Hh%M") %></small>
         </div>
-        <div class="card-footer text-muted">
-          Publié le <%= gossip.created_at.strftime("%d/%m/%Y") %>
+      </div>
+
+      <!-- Contenu du post -->
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to gossip.title, gossip_path(gossip), class: "text-dark text-decoration-none" %></h5>
+        <p class="card-text"><%= truncate(gossip.content, length: 180) %></p>
+      </div>
+
+      <!-- Actions -->
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        <div>
+          <%= link_to "💬 #{pluralize(gossip.comments.count, 'commentaire')}", gossip_path(gossip), class: "btn btn-outline-primary btn-sm" %>
+        </div>
+        <div>
+          <%= button_to "👍 Like", "#", method: :post, class: "btn btn-sm btn-outline-success" %>
         </div>
       </div>
     </div>
   <% end %>
+
 </div>

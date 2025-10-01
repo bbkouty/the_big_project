@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   # get "pages/home"
-  resources :gossips, only: [ :index, :show, :new, :create ]
+  resources :gossips do 
+    resources :comments, only: [ :create, :edit, :update, :destroy ]
+  end
   resources :users, only: [ :show ]
+  resources :cities, only: [ :show ]
   get "pages/team"
   get "pages/contact"
   get "pages/welcome/:first_name", to: "pages#welcome"
