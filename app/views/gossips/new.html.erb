@@ -1,0 +1,30 @@
+<%# app/views/gossips/new.html.erb #%>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Créer un nouveau potin 📝</h2>
+
+  <% if @gossip.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>Nous n'avons pas réussi à créer le potin :</h4>
+      <ul>
+        <% @gossip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_tag gossips_path, method: :post, class: "needs-validation" do %>
+    <div class="mb-3">
+      <%= label_tag :title, "Titre" %>
+      <%= text_field_tag :title, params[:title], class: "form-control", placeholder: "Titre du potin" %>
+    </div>
+
+    <div class="mb-3">
+      <%= label_tag :content, "Contenu" %>
+      <%= text_area_tag :content, params[:content], class: "form-control", placeholder: "Raconte ton potin ici..." %>
+    </div>
+
+    <%= submit_tag "Créer le potin", class: "btn btn-primary" %>
+  <% end %>
+</div>
