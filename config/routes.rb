@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   resources :gossips do
     resources :comments, only: [ :create, :edit, :update, :destroy ]
   end
-  resources :users, only: [ :show ]
+  resources :users, only: [ :new, :create, :show ]
   resources :cities, only: [ :show ]
+  resource :session, only: [ :new, :create, :destroy ]
   get "pages/team"
   get "pages/contact"
   get "pages/welcome/:first_name", to: "pages#welcome"

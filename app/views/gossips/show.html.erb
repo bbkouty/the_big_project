@@ -22,13 +22,15 @@
             <strong><%= comment.user.first_name %>:</strong> <%= comment.content %>
           </span>
 
-          <div class="d-flex gap-1">
-            <!-- Modifier le commentaire -->
-            <%= link_to "✏", edit_gossip_comment_path(@gossip, comment), class: "btn btn-sm btn-outline-success" %>
+          <% if comment.user == current_user %>
+            <div class="d-flex gap-1">
+              <!-- Modifier le commentaire -->
+              <%= link_to "✏", edit_gossip_comment_path(@gossip, comment), class: "btn btn-sm btn-outline-success" %>
 
-            <!-- Supprimer le commentaire -->
-            <%= button_to "🗑", gossip_comment_path(@gossip, comment), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer ce commentaire ?" }, class: "btn btn-sm btn-outline-danger" %>
-          </div>
+              <!-- Supprimer le commentaire -->
+              <%= button_to "🗑", gossip_comment_path(@gossip, comment), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer ce commentaire ?" }, class: "btn btn-sm btn-outline-danger" %>
+            </div>
+          <% end %>
         </div>
         <small class="text-muted">❤️ <%= comment.likes.count %></small>
       </li>
@@ -45,9 +47,11 @@
 
       <div class="d-flex gap-2">
         <%= link_to "⬅ Retour aux potins", root_path, class: "btn btn-secondary" %>
-        <%= link_to "✏ Modifier le potin", edit_gossip_path(@gossip), class: "btn btn-success" %>
-        <%= form_with(model: @gossip, method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "d-inline") do |f| %>
-          <%= f.submit "🗑 Supprimer le potin", class: "btn btn-danger" %>
+        <% if @gossip.user == current_user %>
+          <%= link_to "✏ Modifier le potin", edit_gossip_path(@gossip), class: "btn btn-success" %>
+          <%= form_with(model: @gossip, method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "d-inline") do |f| %>
+            <%= f.submit "🗑 Supprimer le potin", class: "btn btn-danger" %>
+          <% end %>
         <% end %>
       </div>
     </div>

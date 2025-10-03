@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
+  before_action :require_login, only: [ :create, :edit, :update, :destroy ]
   before_action :set_gossip
   before_action :set_comment, only: [ :edit, :update, :destroy ]
 
   def create
     @comment = @gossip.comments.new(comment_params)
-    @comment.user = User.first # utilisateur anonyme pour l'instant
+    @comment.user = current_user # associe l’utilisateur connecté
     if @comment.save
       redirect_to @gossip
     else
@@ -39,5 +40,11 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def authorize_user!
+    unless @comment.user == current_user
+      redirect_to @gossip, alert: "You are not authorized to perform this action."
+    end
   end
 end

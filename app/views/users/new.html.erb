@@ -1,0 +1,48 @@
+<%# app/views/users/new.html.erb #%>
+
+<%= form_with(model: @user, local: true, data: { turbo: false }) do |f| %>
+
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@user.errors.count, "erreur") %> empêchent la création du compte :</h4>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :city_id, "Ville" %>
+    <%= f.collection_select :city_id, City.all, :id, :name, { prompt: "Choisir une ville" }, class: "form-select" %>
+  </div>
+
+  <%= f.submit "Créer mon compte", class: "btn btn-primary" %>
+
+<% end %>

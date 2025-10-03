@@ -51,6 +51,7 @@ end
 puts "10 villes créées ✅"
 
 # Users
+=begin
 10.times do
   User.create!(
     first_name: Faker::Name.first_name,
@@ -99,7 +100,7 @@ puts "Tags assignés aux gossips ✅"
   end
 end
 puts "5 messages privés créés ✅"
-=end
+
 # Comments (sur gossips et commentaires)
 20.times do
   commentable = [ Gossip.all.sample, Comment.all.sample ].compact.sample
@@ -120,7 +121,7 @@ puts "20 commentaires créés ✅"
   )
 end
 puts "20 likes créés ✅"
-
+=end
 puts "Seed terminé 🎉"
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
