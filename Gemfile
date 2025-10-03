@@ -18,7 +18,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Faker for seeds
-gem "faker", "~> 2.20"
+gem "faker", "~> 3.5"
 # Simple form helpers
 gem "simple_form"
 
