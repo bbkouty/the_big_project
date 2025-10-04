@@ -1,6 +1,6 @@
 class GossipsController < ApplicationController
-  before_action :set_gossip, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, only: [:new, :create, :edit, :update, :destroy] # protège les actions sensibles
+  before_action :set_gossip, only: [ :show, :edit, :update, :destroy ]
+  before_action :require_login, only: [ :new, :create, :edit, :update, :destroy ] # protège les actions sensibles
 
   def index
     @gossips = Gossip.all
@@ -17,7 +17,7 @@ class GossipsController < ApplicationController
 
   def create
     @gossip = Gossip.new(gossip_params)
-    @gossip.user = current_user   # associe l’utilisateur connecté
+    @gossip.user = current_user # associe l’utilisateur connecté
 
     if @gossip.save
       redirect_to root_path, notice: "Gossip créé avec succès 🎉"
