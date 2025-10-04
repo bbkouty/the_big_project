@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   # get "pages/home"
   resources :gossips do
-    resources :comments, only: [ :create, :edit, :update, :destroy ]
+    resources :likes, only: [ :create, :destroy ]
+    resources :comments, only: [ :create, :edit, :update, :destroy ] do
+      resources :likes, only: [ :create, :destroy ]
+    end
   end
   resources :users, only: [ :new, :create, :show ]
   resources :cities, only: [ :show ]

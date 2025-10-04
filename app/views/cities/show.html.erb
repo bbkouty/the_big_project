@@ -7,23 +7,46 @@
   </div>
 </div>
 
-<% if @city.users.any? && @city.gossips.any? %>
+<% if @city.gossips.any? %>
   <h4 class="mb-3">Potins des habitants :</h4>
   <div class="row">
     <% @city.gossips.each do |gossip| %>
       <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-body">
+        <div class="card mb-4 shadow-sm h-100">
+          <div class="card-body d-flex flex-column">
+            
             <h5 class="card-title"><%= gossip.title %></h5>
             <p class="card-text"><%= truncate(gossip.content, length: 100) %></p>
-            <p class="text-muted mb-1">
+            
+            <p class="text-muted mb-2">
               👤 Auteur : 
-              <%= link_to gossip.user.first_name, user_path(gossip.user), class: "text-decoration-none fw-bold" %>
+              <%= link_to gossip.user.first_name, user_path(gossip.user), class: "fw-bold text-decoration-none" %>
             </p>
-            <%= link_to "Voir plus", gossip_path(gossip), class: "btn btn-outline-primary btn-sm" %>
+            
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <%= link_to "Voir plus", gossip_path(gossip), class: "btn btn-outline-primary btn-sm" %>
+              
+              <% if current_user %>
+                <% if gossip.likes.exists?(user: current_user) %>
+                  <%= button_to gossip_like_path(gossip, gossip.likes.find_by(user: current_user)),
+                                method: :delete,
+                                class: "btn btn-sm btn-outline-danger d-flex align-items-center gap-1" do %>
+                    <i class="bi bi-hand-thumbs-up-fill">👎</i> 
+                  <% end %>
+                <% else %>
+                  <%= button_to gossip_likes_path(gossip),
+                                method: :post,
+                                class: "btn btn-sm btn-outline-success d-flex align-items-center gap-1" do %>
+                    <i class="bi bi-hand-thumbs-up">👍</i>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
-          <div class="card-footer text-muted">
-            Publié le <%= gossip.created_at.strftime("%d/%m/%Y") %>
+          
+          <div class="card-footer text-muted small">
+            Publié le <%= l(gossip.created_at, format: :short) %> 
+            · ❤️ <%= gossip.likes.count %>
           </div>
         </div>
       </div>

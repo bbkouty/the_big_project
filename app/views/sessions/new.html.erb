@@ -1,16 +1,32 @@
-<h2>Se connecter</h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm rounded-3">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Se connecter</h2>
 
-<%= form_with url: session_path, local: true do |f| %>
-  <div>
-    <%= label_tag :email %>
-    <%= email_field_tag :email %>
+          <%= form_with url: session_path, local: true, class: "needs-validation" do %>
+            <div class="mb-3">
+              <%= label_tag :email, "Adresse email", class: "form-label" %>
+              <%= email_field_tag :email, nil, class: "form-control", placeholder: "Entrez votre email" %>
+            </div>
+
+            <div class="mb-3">
+              <%= label_tag :password, "Mot de passe", class: "form-label" %>
+              <%= password_field_tag :password, nil, class: "form-control", placeholder: "Entrez votre mot de passe" %>
+            </div>
+
+            <div class="d-grid">
+              <%= submit_tag "Connexion", class: "btn btn-primary btn-block" %>
+            </div>
+          <% end %>
+
+          <p class="text-center mt-3">
+            Vous n'avez pas de compte ?
+            <%= link_to "Inscrivez-vous", new_user_path, class: "text-decoration-none" %>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
-
-  <%= submit_tag "Connexion" %>
-<% end %>
-<p>Vous n'avez pas de compte ? <%= link_to "Inscrivez-vous", new_user_path %></p>
+</div>

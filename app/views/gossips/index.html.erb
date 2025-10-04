@@ -1,4 +1,4 @@
-<%# app/views/gossips/index.html.erb %>
+<%# app/views/gossips/index.html.erb #%>
 
 <div class="container mt-4">
 
@@ -32,7 +32,12 @@
           <%= link_to "💬 #{pluralize(gossip.comments.count, 'commentaire')}", gossip_path(gossip), class: "btn btn-outline-primary btn-sm" %>
         </div>
         <div>
-          <%= button_to "👍 Like", "#", method: :post, class: "btn btn-sm btn-outline-success" %>
+          <% if current_user %>
+            <%= button_to "👍 Like", gossip_likes_path(gossip), method: :post, class: "btn btn-sm btn-outline-success" %>
+          <% else %>
+            <small class="text-muted">Connectez-vous pour liker</small>
+          <% end %>
+          <span class="badge bg-info ms-2"><%= gossip.likes.count %> likes
         </div>
       </div>
     </div>

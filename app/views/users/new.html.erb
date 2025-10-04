@@ -29,6 +29,16 @@
   </div>
 
   <div class="mb-3">
+    <%= f.label :age %>
+    <%= f.number_field :age, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
     <%= f.label :password %>
     <%= f.password_field :password, class: "form-control" %>
   </div>
