@@ -15,9 +15,13 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  pool: 5
+  username: idrissa
+  password: "soumare"     
+  host: localhost
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+ 
 
 
 development:
@@ -56,7 +60,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: the_big_project_test_personal
+  database: the_big_project_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,20 +83,5 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
-    <<: *default
-    database: the_big_project_production
-    username: the_big_project
-    password: <%= ENV["THE_BIG_PROJECT_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: the_big_project_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: the_big_project_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: the_big_project_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
+  database: the_big_project_production

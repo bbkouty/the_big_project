@@ -3,23 +3,26 @@
 <div class="container mt-5">
   <div class="card shadow-lg p-4 rounded">
     <h1 class="text-center text-primary mb-4">📩 Contactez-nous</h1>
-    <form>
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <div class="mb-3">
-        <label for="name" class="form-label">Nom complet</label>
-        <input type="text" class="form-control" id="name" placeholder="Votre nom">
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Adresse email</label>
-        <input type="email" class="form-control" id="email" placeholder="nom@example.com">
-      </div>
-      <div class="mb-3">
-        <label for="message" class="form-label">Message</label>
-        <textarea class="form-control" id="message" rows="4" placeholder="Votre message..."></textarea>
-      </div>
-      <div class="d-grid">
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-      </div>
-    </form>
+   <%= form_with url: contact_path, method: :post, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, "Nom complet", class: "form-label" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Votre nom" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :email, "Adresse email", class: "form-label" %>
+    <%= f.email_field :email, class: "form-control", placeholder: "nom@example.com" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :message, "Message", class: "form-label" %>
+    <%= f.text_area :message, class: "form-control", rows: 4, placeholder: "Votre message..." %>
+  </div>
+
+  <div class="d-grid">
+    <%= f.submit "Envoyer", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
   </div>
 </div>

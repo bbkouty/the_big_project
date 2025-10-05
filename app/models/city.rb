@@ -3,4 +3,5 @@ class City < ApplicationRecord
     has_many :gossips, through: :users
     # validations
     validates :name, :zip_code, presence: true
+    validates :zip_code, presence: true
 end

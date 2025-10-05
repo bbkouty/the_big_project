@@ -1,15 +1,17 @@
+
+
+
 class PagesController < ApplicationController
-  def home
-    @gossips = Gossip.all
-  end
-
-  def team
-  end
-
   def contact
   end
 
-  def welcome
-    @first_name = params[:first_name]
+  def send_message
+    name = params[:name]
+    email = params[:email]
+    message = params[:message]
+
+    # Ici, tu pourrais ajouter un envoi d’email, ou juste afficher un message
+    flash[:notice] = "Merci #{name}, votre message a bien été envoyé ✅"
+    redirect_to contact_path
   end
 end
